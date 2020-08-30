@@ -4,42 +4,32 @@ using UnityEngine;
 using UnityEngine.Tilemaps;
 using UnityEngine.UI;
 
-public class TouchInputController : MonoBehaviour
-{
+public class TouchInputController : MonoBehaviour {
     public Material newMaterialRef;
     public Text textLabel;
     public GameObject gameManager;
     public Grid grid;
-    public Tilemap tilemap;
-    void Start()
-    {
+    public Tilemap tileMap;
+    void Start() {
+        //tileMap = transform.GetComponentInParent<Tilemap>();
 
     }
 
-    void Update()
-    {
-        foreach (Touch touch in Input.touches)
-        {
-            if (touch.phase == TouchPhase.Began || Input.GetMouseButtonDown(0))
-            {
+    void Update() {
+        foreach (Touch touch in Input.touches) {
+            if (touch.phase == TouchPhase.Began || Input.GetMouseButtonDown(0)) {
                 // Construct a ray from the current touch coordinates
-                Ray ray = Camera.main.ScreenPointToRay(new Vector2(Input.mousePosition.x, Input.mousePosition.y));
-                Ray ray2 = Camera.main.ScreenPointToRay(Input.mousePosition);
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
                 Plane plane = new Plane(Vector3.back, Vector3.zero);
                 // Do a Plane Raycast with your screen to world ray
-                float hitDist;
-                plane.Raycast(ray2, out hitDist);
-
-                // If you aimed towards this infinite Plane, it hit
-                var point = ray2.GetPoint(hitDist);
-                Debug.Log("Point: " + point);
-
-                Vector3Int cellPosition = tilemap.WorldToCell(point);
-                TileBase tile = tilemap.GetTile(cellPosition);
-                if (tile != null)
-                {
+                float hitPosition;
+                plane.Raycast(ray, out hitPosition);
+                Vector3 point = ray.GetPoint(hitPosition);
+                Vector3Int cellPosition = tileMap.WorldToCell(point);
+                TileBase tile = tileMap.GetTile(cellPosition);
+                if (tileMap.HasTile(cellPosition)) {
                     Debug.Log(string.Format("Tile is: {0}", tile.name));
-                    Debug.Log("Tile sprite: " + tilemap.GetSprite(cellPosition));
+                    //Debug.Log("Tile sprite: " + tileMap.GetSprite(cellPosition));
                 }
                 // RaycastHit hit;
 
@@ -77,8 +67,7 @@ public class TouchInputController : MonoBehaviour
     }
 
 
-    void OnGUI()
-    {
+    void OnGUI() {
         //GUI.Label(new Rect(0, 0, 200, 100), "Anzahl der Touches: " + Input.touches.Length.ToString() + " fingerPos: " + fingerPos);
     }
 }
