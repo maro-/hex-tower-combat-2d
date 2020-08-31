@@ -8,10 +8,12 @@ public class MouseInputController : MonoBehaviour {
     public Tilemap tilemap;
     public Tile tile;
     TilemapController tilemapController;
+    HexTilemap hexTilemap;
 
     // Update is called once per frame
     void Start() {
         tilemapController = TilemapController.Instance;
+        hexTilemap = HexTilemap.Instance;
     }
 
     void Update() {
@@ -25,12 +27,12 @@ public class MouseInputController : MonoBehaviour {
             Vector3 point = ray.GetPoint(hitPosition);
             Vector3Int cellPosition = tilemap.WorldToCell(point);
             Debug.Log("Tile position: " + cellPosition);
-            if (tilemap.HasTile(cellPosition) && tilemapController.isTileInAdjacentTiles(cellPosition)) {
+            if (tilemap.HasTile(cellPosition) && hexTilemap.isTileInAdjacentTiles(cellPosition)) {
                 Debug.Log(string.Format("Tile is: {0}", tile.name));
 
                 tilemap.SetTile(cellPosition, tile);
-                tilemapController.AddToConqueredTiles(cellPosition);
-                tilemapController.AddToAdjacentTiles(cellPosition);
+                hexTilemap.AddToConqueredTiles(cellPosition);
+                hexTilemap.AddToAdjacentTiles(cellPosition);
                 // tile.GetTileData(cellPosition,tilemap,)
             }
         }
