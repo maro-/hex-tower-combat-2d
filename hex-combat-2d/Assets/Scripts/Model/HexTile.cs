@@ -11,10 +11,15 @@ public class HexTile {
     public Sprite conqueredSprite;
     public Sprite enemySprite;
     private bool isActive;
-    public bool IsActive { get { return isActive; } set { isActive = value; tile.sprite = activeSprite; } }
-    private bool cellPosition;
-    public bool CellPosition { get { return cellPosition; } set { cellPosition = value; } }
+    public bool IsActive { get { return isActive; } set { isActive = value; } }
+    private bool isConquered;
+    public bool IsConquered { get { return isConquered; } set { isConquered = value; } }
+    private Vector3Int cellPosition;
+    public Vector3Int CellPosition { get { return cellPosition; } set { cellPosition = value; } }
     // Start is called before the first frame update
+    // public HexTile(Vector3Int cellPosition) {
+    //     CellPosition = cellPosition;
+    // }
     void Start() {
 
     }

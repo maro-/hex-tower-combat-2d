@@ -277,11 +277,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 237f3a25f1d496242ab1776389c8a1a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tilemap: {fileID: 1683710090}
-  inactiveTile: {fileID: 11400000, guid: a0d549a910b09f3439030fd22a809edb, type: 2}
-  activeTile: {fileID: 11400000, guid: bd1cefa5eb9796c4282f0164c29d53b7, type: 2}
-  conqueredTile: {fileID: 11400000, guid: 03af32fda15602b4fa260a17515b8c02, type: 2}
-  enemyTile: {fileID: 11400000, guid: 7835446a46806aa4d9e7359194ad1d07, type: 2}
 --- !u!1 &1683710086
 GameObject:
   m_ObjectHideFlags: 0
@@ -294,6 +289,7 @@ GameObject:
   - component: {fileID: 1683710090}
   - component: {fileID: 1683710089}
   - component: {fileID: 1683710088}
+  - component: {fileID: 1683710091}
   m_Layer: 0
   m_Name: Tilemap
   m_TagString: Untagged
@@ -670,6 +666,22 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!114 &1683710091
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1683710086}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef4dae6063cb741468279d104574ca1e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inactiveTile: {fileID: 11400000, guid: a0d549a910b09f3439030fd22a809edb, type: 2}
+  activeTile: {fileID: 11400000, guid: bd1cefa5eb9796c4282f0164c29d53b7, type: 2}
+  conqueredTile: {fileID: 11400000, guid: 03af32fda15602b4fa260a17515b8c02, type: 2}
+  enemyTile: {fileID: 11400000, guid: d2b736d61cad82d49ba8ea73d568b8c9, type: 2}
 --- !u!1 &1784427895
 GameObject:
   m_ObjectHideFlags: 0

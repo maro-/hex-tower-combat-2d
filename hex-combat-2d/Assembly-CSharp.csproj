@@ -36,12 +36,12 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>
+     <Compile Include="Assets\Scripts\Model\HexTilemap.cs" />
      <Compile Include="Assets\Scripts\Controller\TouchInputController.cs" />
      <Compile Include="Assets\Scripts\Controller\TilemapController.cs" />
      <Compile Include="Assets\Scripts\Controller\MouseInputController.cs" />
      <Compile Include="Assets\Scripts\GameManager.cs" />
      <Compile Include="Assets\Scripts\Model\HexTile.cs" />
-     <Compile Include="Assets\Scripts\Model\HexTilemap.cs" />
     <Reference Include="UnityEngine">
         <HintPath>C:/Program Files/Unity/Hub/Editor/2020.1.3f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
     </Reference>
