@@ -6,11 +6,14 @@ using UnityEngine.Tilemaps;
 public class MouseInputController : MonoBehaviour {
     // Start is called before the first frame update
     public Tilemap tilemap;
-    public Tile tile;
+    public Tile selectedTile;
+    private Vector3Int previouslySelectedPosition;
+    public bool wasPreviouslySelected = false;
+    public TileBase previouslySelectedTile;
+
     TilemapController tilemapController;
     HexTilemap hexTilemap;
 
-    // Update is called once per frame
     void Start() {
         tilemapController = TilemapController.Instance;
         hexTilemap = HexTilemap.Instance;
@@ -28,12 +31,17 @@ public class MouseInputController : MonoBehaviour {
             Vector3Int cellPosition = tilemap.WorldToCell(point);
             Debug.Log("Tile position: " + cellPosition);
             if (tilemap.HasTile(cellPosition) && hexTilemap.isTileInAdjacentTiles(cellPosition)) {
-                Debug.Log(string.Format("Tile is: {0}", tile.name));
+                hexTilemap.SelectedPosition = cellPosition;
+                if (wasPreviouslySelected){
+                    tilemap.SetTile(previouslySelectedPosition, hexTilemap.previouslySelectedTile);
+                }
+                wasPreviouslySelected = true;
+                hexTilemap.previouslySelectedTile = tilemap.GetTile(cellPosition);
+                previouslySelectedPosition = cellPosition;
 
-                tilemap.SetTile(cellPosition, tile);
-                hexTilemap.AddToConqueredTiles(cellPosition);
-                hexTilemap.AddToAdjacentTiles(cellPosition);
-                // tile.GetTileData(cellPosition,tilemap,)
+                Debug.Log(string.Format("Tile is: {0}", selectedTile.name));
+                tilemap.SetTile(cellPosition, selectedTile);
+
             }
         }
     }

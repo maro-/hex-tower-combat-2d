@@ -9,10 +9,13 @@ public class HexTilemap : MonoBehaviour {
     public Tile inactiveTile;
     public Tile activeTile;
     public Tile conqueredTile;
+    private Vector3Int selectedPosition;
+    public Vector3Int SelectedPosition{get;set;}
     public Tile enemyTile;
     Dictionary<Vector3Int, HexTile> combatTilesPositions;
     HashSet<Vector3Int> conqueredTilesPositions;
     HashSet<Vector3Int> adjacentTilesPositions;
+    public TileBase previouslySelectedTile;
 
     public static HexTilemap Instance { get; private set; }
 
@@ -43,8 +46,12 @@ public class HexTilemap : MonoBehaviour {
         }
     }
 
-    void Start() {
-        
+    public GameObject GetInstantiatedObject(Vector3Int cellPosition){
+        return tilemap.GetInstantiatedObject(cellPosition);
+    }
+
+    public Vector3 getTileWorldPosition(Vector3Int cellPosition){
+        return tilemap.CellToWorld(cellPosition);
     }
 
     public void AddToAdjacentTiles(Vector3Int cellPosition) {
@@ -75,6 +82,7 @@ public class HexTilemap : MonoBehaviour {
         tilemap.SetTile(cellPosition, conqueredTile);
         // Add the adjacent Tiles to adjacentTilesPositions, so they can be clicked now
         combatTilesPositions[cellPosition].IsConquered = true;
+        previouslySelectedTile = conqueredTile;
     }
 
     private void updateAdjacentTile(Vector3Int cellPosition) {
@@ -92,8 +100,6 @@ public class HexTilemap : MonoBehaviour {
         return false;
     }
 
-
-
     public bool isTileInAdjacentTiles(Vector3Int cellPosition) {
         if (adjacentTilesPositions.Contains(cellPosition)) {
             return true;
@@ -101,7 +107,4 @@ public class HexTilemap : MonoBehaviour {
         return false;
     }
 
-    void Update() {
-
-    }
 }
