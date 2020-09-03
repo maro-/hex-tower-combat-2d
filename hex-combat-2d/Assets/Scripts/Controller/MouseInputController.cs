@@ -9,19 +9,15 @@ public class MouseInputController : MonoBehaviour {
     public Tile selectedTile;
     private Vector3Int previouslySelectedPosition;
     public bool wasPreviouslySelected = false;
-    public TileBase previouslySelectedTile;
-
-    TilemapController tilemapController;
     HexTilemap hexTilemap;
 
     void Start() {
-        tilemapController = TilemapController.Instance;
         hexTilemap = HexTilemap.Instance;
     }
 
     void Update() {
         if (Input.GetMouseButtonDown(0)) {
-            // Construct a ray from the current touch coordinates
+            // Construct a ray from the current click coordinates
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             Plane plane = new Plane(Vector3.back, Vector3.zero);
             // Do a Plane Raycast with your screen to world ray
@@ -29,7 +25,7 @@ public class MouseInputController : MonoBehaviour {
             plane.Raycast(ray, out hitPosition);
             Vector3 point = ray.GetPoint(hitPosition);
             Vector3Int cellPosition = tilemap.WorldToCell(point);
-            Debug.Log("Tile position: " + cellPosition);
+            // Debug.Log("Tile position: " + cellPosition);
             if (tilemap.HasTile(cellPosition) && hexTilemap.IsTileInAdjacentTiles(cellPosition)) {
                 hexTilemap.SelectedPosition = cellPosition;
                 if (wasPreviouslySelected){
@@ -39,7 +35,7 @@ public class MouseInputController : MonoBehaviour {
                 hexTilemap.previouslySelectedTile = tilemap.GetTile(cellPosition);
                 previouslySelectedPosition = cellPosition;
 
-                Debug.Log(string.Format("Tile is: {0}", selectedTile.name));
+                // Debug.Log(string.Format("Tile is: {0}", selectedTile.name));
                 tilemap.SetTile(cellPosition, selectedTile);
 
             }

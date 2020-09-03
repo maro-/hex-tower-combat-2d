@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour {
     public static GameManager Instance { get; private set; }
     public GameObject turretTower;
     private HexTilemap hexTilemap;
+    private IncomeManager incomeManager;
     readonly Vector3Int startPosition = new Vector3Int(0, -2, 0);
 
 
@@ -20,17 +21,22 @@ public class GameManager : MonoBehaviour {
     }
     void Start() {
         hexTilemap = HexTilemap.Instance;
+        incomeManager = IncomeManager.Instance;
         hexTilemap.AddToAdjacentTiles(startPosition);
         hexTilemap.AddToConqueredTiles(startPosition);
-        hexTilemap.SelectedPosition = startPosition;
-        createTower();
+        GameObject gameobject = Instantiate(turretTower,
+                hexTilemap.GetTileWorldPosition(startPosition),
+                Quaternion.identity);
     }
 
     public void createTower() {
-        GameObject gameobject = Instantiate(turretTower,
-            hexTilemap.GetTileWorldPosition(hexTilemap.SelectedPosition),
-            Quaternion.identity);
-        hexTilemap.AddToAdjacentTiles(hexTilemap.SelectedPosition);
-        hexTilemap.AddToConqueredTiles(hexTilemap.SelectedPosition);
+        if (incomeManager.GoldAmount >= 15) {
+            GameObject gameobject = Instantiate(turretTower,
+                hexTilemap.GetTileWorldPosition(hexTilemap.SelectedPosition),
+                Quaternion.identity);
+            hexTilemap.AddToAdjacentTiles(hexTilemap.SelectedPosition);
+            hexTilemap.AddToConqueredTiles(hexTilemap.SelectedPosition);
+            incomeManager.GoldAmount -= 15;
+        }
     }
 }
