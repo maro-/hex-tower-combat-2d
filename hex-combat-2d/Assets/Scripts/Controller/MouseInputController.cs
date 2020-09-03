@@ -30,7 +30,7 @@ public class MouseInputController : MonoBehaviour {
             Vector3 point = ray.GetPoint(hitPosition);
             Vector3Int cellPosition = tilemap.WorldToCell(point);
             Debug.Log("Tile position: " + cellPosition);
-            if (tilemap.HasTile(cellPosition) && hexTilemap.isTileInAdjacentTiles(cellPosition)) {
+            if (tilemap.HasTile(cellPosition) && hexTilemap.IsTileInAdjacentTiles(cellPosition)) {
                 hexTilemap.SelectedPosition = cellPosition;
                 if (wasPreviouslySelected){
                     tilemap.SetTile(previouslySelectedPosition, hexTilemap.previouslySelectedTile);

@@ -50,7 +50,7 @@ public class HexTilemap : MonoBehaviour {
         return tilemap.GetInstantiatedObject(cellPosition);
     }
 
-    public Vector3 getTileWorldPosition(Vector3Int cellPosition){
+    public Vector3 GetTileWorldPosition(Vector3Int cellPosition){
         return tilemap.CellToWorld(cellPosition);
     }
 
@@ -60,17 +60,17 @@ public class HexTilemap : MonoBehaviour {
 
         // Add the adjacent Tiles to adjacentTilesPositions, so they can be clicked now
         Debug.Log("cellPosition: " + cellPosition.ToString());
-        updateAdjacentTile(cellPosition + new Vector3Int(1, 0, 0));
-        updateAdjacentTile(cellPosition + new Vector3Int(-1, 0, 0));
-        updateAdjacentTile(cellPosition + new Vector3Int(0, 1, 0));
-        updateAdjacentTile(cellPosition + new Vector3Int(0, -1, 0));
-        updateAdjacentTile(cellPosition + new Vector3Int(-1, -1, 0));
+        UpdateAdjacentTile(cellPosition + new Vector3Int(1, 0, 0));
+        UpdateAdjacentTile(cellPosition + new Vector3Int(-1, 0, 0));
+        UpdateAdjacentTile(cellPosition + new Vector3Int(0, 1, 0));
+        UpdateAdjacentTile(cellPosition + new Vector3Int(0, -1, 0));
+        UpdateAdjacentTile(cellPosition + new Vector3Int(-1, -1, 0));
 
         // Vertical axis has offset, so neighbor coordinates change in dependancy of odd/even row
-        if (isRowEven(cellPosition)) {
-            updateAdjacentTile(cellPosition + new Vector3Int(-1, 1, 0));
+        if (IsRowEven(cellPosition)) {
+            UpdateAdjacentTile(cellPosition + new Vector3Int(-1, 1, 0));
         } else {
-            updateAdjacentTile(cellPosition + new Vector3Int(1, 1, 0));
+            UpdateAdjacentTile(cellPosition + new Vector3Int(1, 1, 0));
         }
 
     }
@@ -85,7 +85,7 @@ public class HexTilemap : MonoBehaviour {
         previouslySelectedTile = conqueredTile;
     }
 
-    private void updateAdjacentTile(Vector3Int cellPosition) {
+    private void UpdateAdjacentTile(Vector3Int cellPosition) {
         if (tilemap.HasTile(cellPosition) && combatTilesPositions[cellPosition].IsConquered == false) {
             // TODO: Check here, if the tile on this position ist already conquered. If yes, don't check tile
             adjacentTilesPositions.Add(cellPosition);
@@ -93,14 +93,14 @@ public class HexTilemap : MonoBehaviour {
         }
     }
 
-    private bool isRowEven(Vector3Int cellPosition) {
+    private bool IsRowEven(Vector3Int cellPosition) {
         if (cellPosition.y % 2 == 0) {
             return true;
         }
         return false;
     }
 
-    public bool isTileInAdjacentTiles(Vector3Int cellPosition) {
+    public bool IsTileInAdjacentTiles(Vector3Int cellPosition) {
         if (adjacentTilesPositions.Contains(cellPosition)) {
             return true;
         }
