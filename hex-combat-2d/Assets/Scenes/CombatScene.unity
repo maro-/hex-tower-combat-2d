@@ -386,7 +386,6 @@ MonoBehaviour:
   tilemap: {fileID: 1683710090}
   selectedTile: {fileID: 11400000, guid: 03af32fda15602b4fa260a17515b8c02, type: 2}
   wasPreviouslySelected: 0
-  previouslySelectedTile: {fileID: 0}
 --- !u!114 &871315698
 MonoBehaviour:
   m_ObjectHideFlags: 0
