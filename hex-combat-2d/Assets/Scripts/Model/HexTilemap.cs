@@ -10,11 +10,12 @@ public class HexTilemap : MonoBehaviour {
     public Tile activeTile;
     public Tile conqueredTile;
     private Vector3Int selectedPosition;
-    public Vector3Int SelectedPosition{get;set;}
+    public Vector3Int SelectedPosition { get; set; }
     public Tile enemyTile;
     Dictionary<Vector3Int, HexTile> combatTilesPositions;
     HashSet<Vector3Int> conqueredTilesPositions;
     HashSet<Vector3Int> adjacentTilesPositions;
+    HashSet<Vector3Int> enemyTilesPositions;
     public TileBase previouslySelectedTile;
 
     public static HexTilemap Instance { get; private set; }
@@ -29,6 +30,7 @@ public class HexTilemap : MonoBehaviour {
         combatTilesPositions = new Dictionary<Vector3Int, HexTile>();
         conqueredTilesPositions = new HashSet<Vector3Int>();
         adjacentTilesPositions = new HashSet<Vector3Int>();
+        enemyTilesPositions = new HashSet<Vector3Int>();
         if (tilemap == null) {
             Debug.LogError("No Tilemap on object found.");
         }
@@ -46,11 +48,11 @@ public class HexTilemap : MonoBehaviour {
         }
     }
 
-    public GameObject GetInstantiatedObject(Vector3Int cellPosition){
+    public GameObject GetInstantiatedObject(Vector3Int cellPosition) {
         return tilemap.GetInstantiatedObject(cellPosition);
     }
 
-    public Vector3 GetTileWorldPosition(Vector3Int cellPosition){
+    public Vector3 GetTileWorldPosition(Vector3Int cellPosition) {
         return tilemap.CellToWorld(cellPosition);
     }
 
@@ -85,11 +87,23 @@ public class HexTilemap : MonoBehaviour {
         previouslySelectedTile = conqueredTile;
     }
 
+    public void AddToEnemyTiles(Vector3Int cellPosition) {
+        // Add the Tile at 'cellPosition' to the conqueredTilesPositions
+        enemyTilesPositions.Add(cellPosition);
+        // Change the sprite of the tile
+        tilemap.SetTile(cellPosition, enemyTile);
+        // Add the adjacent Tiles to adjacentTilesPositions, so they can be clicked now
+        combatTilesPositions[cellPosition].IsEnemy = true;
+    }
+
     private void UpdateAdjacentTile(Vector3Int cellPosition) {
-        if (tilemap.HasTile(cellPosition) && combatTilesPositions[cellPosition].IsConquered == false) {
+        if (tilemap.HasTile(cellPosition)
+            && combatTilesPositions[cellPosition].IsConquered == false
+            && combatTilesPositions[cellPosition].IsEnemy == false) {
             // TODO: Check here, if the tile on this position ist already conquered. If yes, don't check tile
             adjacentTilesPositions.Add(cellPosition);
             tilemap.SetTile(cellPosition, activeTile);
+
         }
     }
 

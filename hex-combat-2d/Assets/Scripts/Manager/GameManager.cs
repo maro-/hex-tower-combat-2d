@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour {
     private HexTilemap hexTilemap;
     private IncomeManager incomeManager;
     readonly Vector3Int startPosition = new Vector3Int(0, -2, 0);
+    readonly Vector3Int enemyStartPosition = new Vector3Int(0, 2, 0);
 
 
     void Awake() {
@@ -22,21 +23,29 @@ public class GameManager : MonoBehaviour {
     void Start() {
         hexTilemap = HexTilemap.Instance;
         incomeManager = IncomeManager.Instance;
-        hexTilemap.AddToAdjacentTiles(startPosition);
-        hexTilemap.AddToConqueredTiles(startPosition);
-        GameObject gameobject = Instantiate(turretTower,
-                hexTilemap.GetTileWorldPosition(startPosition),
+        InstantiateTower(startPosition);
+        //instantiate enemy
+        GameObject towerObject = Instantiate(turretTower, 
+                hexTilemap.GetTileWorldPosition(enemyStartPosition), 
                 Quaternion.identity);
+        hexTilemap.AddToEnemyTiles(enemyStartPosition);
+        
+
     }
 
     public void createTower() {
         if (incomeManager.GoldAmount >= 15) {
-            GameObject gameobject = Instantiate(turretTower,
-                hexTilemap.GetTileWorldPosition(hexTilemap.SelectedPosition),
-                Quaternion.identity);
-            hexTilemap.AddToAdjacentTiles(hexTilemap.SelectedPosition);
-            hexTilemap.AddToConqueredTiles(hexTilemap.SelectedPosition);
+            InstantiateTower(hexTilemap.SelectedPosition);
             incomeManager.GoldAmount -= 15;
         }
+    }
+
+    private void InstantiateTower(Vector3Int cellPosition) {
+        GameObject towerObject = Instantiate(turretTower, 
+                hexTilemap.GetTileWorldPosition(cellPosition), 
+                Quaternion.identity);
+        towerObject.GetComponent<TowerData>().CellPosition = cellPosition;
+        hexTilemap.AddToAdjacentTiles(cellPosition);
+        hexTilemap.AddToConqueredTiles(cellPosition);
     }
 }

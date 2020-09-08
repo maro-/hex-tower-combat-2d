@@ -14,6 +14,8 @@ public class HexTile {
     public bool IsActive { get { return isActive; } set { isActive = value; } }
     private bool isConquered;
     public bool IsConquered { get { return isConquered; } set { isConquered = value; } }
+    private bool isEnemy;
+    public bool IsEnemy { get { return isEnemy; } set { isEnemy = value; } }
     private Vector3Int cellPosition;
     public Vector3Int CellPosition { get { return cellPosition; } set { cellPosition = value; } }
     // Start is called before the first frame update

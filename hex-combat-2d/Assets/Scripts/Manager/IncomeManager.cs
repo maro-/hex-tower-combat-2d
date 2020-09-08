@@ -7,7 +7,7 @@ public class IncomeManager : MonoBehaviour {
     public static event Action<long> GoldAmountChanged;
     public static event Action<long> GoldIncomeChanged;
     IEnumerator timeCountEnumerator;
-    private long goldAmount = 10;
+    private long goldAmount = 50;
     public long GoldAmount {
         get { return goldAmount; }
         set {
