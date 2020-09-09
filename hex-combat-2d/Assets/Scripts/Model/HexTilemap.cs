@@ -12,7 +12,7 @@ public class HexTilemap : MonoBehaviour {
     private Vector3Int selectedPosition;
     public Vector3Int SelectedPosition { get; set; }
     public Tile enemyTile;
-    Dictionary<Vector3Int, HexTile> combatTilesPositions;
+    public Dictionary<Vector3Int, HexTile> combatTilesPositions;
     HashSet<Vector3Int> conqueredTilesPositions;
     HashSet<Vector3Int> adjacentTilesPositions;
     HashSet<Vector3Int> enemyTilesPositions;

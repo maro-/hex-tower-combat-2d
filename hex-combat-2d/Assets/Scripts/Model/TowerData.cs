@@ -47,7 +47,8 @@ public class TowerData : MonoBehaviour {
         }
     }
 
-    private List<Vector3Int> adjacentCellPosition = new List<Vector3Int>();
+    private List<Vector3Int> adjacentCellPositions = new List<Vector3Int>();
+    public List<Vector3Int> AdjacentCellPositions { get; private set; }
 
     // Start is called before the first frame update
     void Start() {
@@ -81,17 +82,17 @@ public class TowerData : MonoBehaviour {
     }
 
     private void SetAdjacentTiles(Vector3Int cellPosition) {
-        adjacentCellPosition.Add(cellPosition + new Vector3Int(1, 0, 0));
-        adjacentCellPosition.Add(cellPosition + new Vector3Int(-1, 0, 0));
-        adjacentCellPosition.Add(cellPosition + new Vector3Int(0, 1, 0));
-        adjacentCellPosition.Add(cellPosition + new Vector3Int(0, -1, 0));
-        adjacentCellPosition.Add(cellPosition + new Vector3Int(-1, -1, 0));
+        adjacentCellPositions.Add(cellPosition + new Vector3Int(1, 0, 0));
+        adjacentCellPositions.Add(cellPosition + new Vector3Int(-1, 0, 0));
+        adjacentCellPositions.Add(cellPosition + new Vector3Int(0, 1, 0));
+        adjacentCellPositions.Add(cellPosition + new Vector3Int(0, -1, 0));
+        adjacentCellPositions.Add(cellPosition + new Vector3Int(-1, -1, 0));
 
         // Vertical axis has offset, so neighbor coordinates change in dependancy of odd/even row
         if (IsRowEven(cellPosition)) {
-            adjacentCellPosition.Add(cellPosition + new Vector3Int(-1, 1, 0));
+            adjacentCellPositions.Add(cellPosition + new Vector3Int(-1, 1, 0));
         } else {
-            adjacentCellPosition.Add(cellPosition + new Vector3Int(1, 1, 0));
+            adjacentCellPositions.Add(cellPosition + new Vector3Int(1, 1, 0));
         }
     }
 

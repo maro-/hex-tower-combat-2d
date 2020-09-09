@@ -39,13 +39,15 @@
      <Compile Include="Assets\Scripts\Manager\IncomeManager.cs" />
      <Compile Include="Assets\Scripts\Model\HexTilemap.cs" />
      <Compile Include="Assets\Scripts\Controller\TouchInputController.cs" />
-     <Compile Include="Assets\Scripts\Model\Attack.cs" />
+     <Compile Include="Assets\Scripts\Units\Attack.cs" />
      <Compile Include="Assets\Scripts\Controller\MouseInputController.cs" />
      <Compile Include="Assets\Scripts\Manager\GameManager.cs" />
      <Compile Include="Assets\Scripts\Model\TowerData.cs" />
      <Compile Include="Assets\Scripts\Manager\UIManager.cs" />
      <Compile Include="Assets\Scripts\Units\HealthBar.cs" />
      <Compile Include="Assets\Scripts\Model\HexTile.cs" />
+     <Compile Include="Assets\Scripts\Units\EnemyDestructionDelegate.cs" />
+     <Compile Include="Assets\Scripts\Units\BulletBehaviour.cs" />
     <Reference Include="UnityEngine">
         <HintPath>C:/Program Files/Unity/Hub/Editor/2020.1.3f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
     </Reference>

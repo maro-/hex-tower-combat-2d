@@ -399,6 +399,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   turretTower: {fileID: 5805414268206717574, guid: dd1da8aef477b604da84fe69dd49d8ca, type: 3}
+  enemyTurretTower: {fileID: 825494291485020208, guid: 10555a65524bcd4408b1ae001b130d74, type: 3}
 --- !u!4 &871315699
 Transform:
   m_ObjectHideFlags: 0

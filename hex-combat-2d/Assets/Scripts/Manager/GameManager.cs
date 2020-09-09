@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour {
 
     public static GameManager Instance { get; private set; }
     public GameObject turretTower;
+    public GameObject enemyTurretTower;
     private HexTilemap hexTilemap;
     private IncomeManager incomeManager;
     readonly Vector3Int startPosition = new Vector3Int(0, -2, 0);
@@ -25,7 +26,7 @@ public class GameManager : MonoBehaviour {
         incomeManager = IncomeManager.Instance;
         InstantiateTower(startPosition);
         //instantiate enemy
-        GameObject towerObject = Instantiate(turretTower, 
+        GameObject enemyTowerObject = Instantiate(enemyTurretTower, 
                 hexTilemap.GetTileWorldPosition(enemyStartPosition), 
                 Quaternion.identity);
         hexTilemap.AddToEnemyTiles(enemyStartPosition);
