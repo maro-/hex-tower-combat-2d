@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class UIManager : MonoBehaviour {
     public Text goldAmountText;
     public Text goldIncomeText;
+    public Button buildButton;
 
     public static UIManager Instance { get; private set; }
     void Awake() {

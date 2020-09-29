@@ -8,13 +8,13 @@ public class Attack : MonoBehaviour {
     public List<GameObject> enemiesInRange;
     private float lastShotTime;
     private TowerData towerData;
-    public HexTilemap hexTilemap;
+    // public PlayerTilemap hexTilemap;
     GameObject target = null;
 
 
     // Start is called before the first frame update
     void Start() {
-        hexTilemap = HexTilemap.Instance;
+        // hexTilemap = PlayerTilemap.Instance;
         lastShotTime = Time.time;
         towerData = gameObject.GetComponentInChildren<TowerData>();
         adjacentEnemyPositions = towerData.AdjacentCellPositions;
