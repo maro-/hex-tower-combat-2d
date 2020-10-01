@@ -16,11 +16,11 @@ public class PlayerController : MonoBehaviour {
     public Button buildButton;
 
     void Awake() {
-    }
-    void Start() {
         tilemap = GameManager.Instance.tilemap;
         arenaTilesPositions = GameManager.Instance.arenaTilesPositions;
         player = Instantiate(player, new Vector3(20, 0, 0), Quaternion.identity);
+    }
+    void Start() {
         TileRenderer.TilePreviouslySelected += UpdatePreviouslySelectedTile;
 
         buildButton = UIManager.Instance.buildButton;
@@ -37,7 +37,7 @@ public class PlayerController : MonoBehaviour {
             plane.Raycast(ray, out hitPosition);
             Vector3 point = ray.GetPoint(hitPosition);
             Vector3Int cellPosition = tilemap.WorldToCell(point);
-            Debug.Log("Tile position: " + cellPosition);
+            // Debug.Log("Tile position: " + cellPosition);
             if (tilemap.HasTile(cellPosition) && player.playerTilemap.IsTileInAdjacentTiles(cellPosition)) {
                 player.playerTilemap.SelectedPosition = cellPosition;
                 if (wasPreviouslySelected) {

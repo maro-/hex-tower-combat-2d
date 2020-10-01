@@ -7,6 +7,7 @@ public class UIManager : MonoBehaviour {
     public Text goldAmountText;
     public Text goldIncomeText;
     public Button buildButton;
+    private IncomeManager incomeManager;
 
     public static UIManager Instance { get; private set; }
     void Awake() {
@@ -15,10 +16,13 @@ public class UIManager : MonoBehaviour {
         } else {
             Debug.Log("Warning: multiple " + this + " in scene!");
         }
-        IncomeManager.GoldAmountChanged += OnGoldAmountChanged;
-        IncomeManager.GoldIncomeChanged += OnGoldIncomeChanged;
     }
 
+    void Start(){
+        incomeManager = GameManager.Instance.GetComponent<PlayerController>().player.incomeManager;
+        incomeManager.GoldAmountChanged += OnGoldAmountChanged;
+        incomeManager.GoldIncomeChanged += OnGoldIncomeChanged;
+    }
     public void OnGoldAmountChanged(long gold) {
         goldAmountText.text = "Gold: " + gold;
     }
@@ -27,7 +31,7 @@ public class UIManager : MonoBehaviour {
     }
 
     void OnDestroy() {
-        IncomeManager.GoldAmountChanged -= OnGoldAmountChanged;
-        IncomeManager.GoldIncomeChanged -= OnGoldIncomeChanged;
+        incomeManager.GoldAmountChanged -= OnGoldAmountChanged;
+        incomeManager.GoldIncomeChanged -= OnGoldIncomeChanged;
     }
 }

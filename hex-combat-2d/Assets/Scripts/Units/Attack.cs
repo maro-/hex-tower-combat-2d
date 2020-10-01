@@ -91,7 +91,7 @@ public class Attack : MonoBehaviour {
 
     void Shoot(Collider2D target)
     {
-        Debug.Log("shoot");
+        // Debug.Log("shoot");
         GameObject bulletPrefab = towerData.CurrentLevel.bullet;
         // 1 
         Vector3 startPosition = gameObject.transform.position;

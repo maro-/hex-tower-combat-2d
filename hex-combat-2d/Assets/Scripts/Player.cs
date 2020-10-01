@@ -9,7 +9,7 @@ public class Player : MonoBehaviour {
     public Vector3Int startPosition;
     public GameObject turretTower;
     public PlayerTilemap playerTilemap;
-    private IncomeManager incomeManager;
+    public IncomeManager incomeManager;
     public TileRenderer tileRenderer;
 
     void Awake(){
@@ -17,7 +17,7 @@ public class Player : MonoBehaviour {
 
     void Start() {
         // Debug.Log("Start Player." + playerTag);
-        incomeManager = IncomeManager.Instance; //TODO, do not use instance
+        // incomeManager = IncomeManager.Instance; //TODO, do not use instance
         InstantiateTower(startPosition);
     }
 

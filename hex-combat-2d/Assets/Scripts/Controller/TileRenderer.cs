@@ -12,19 +12,15 @@ public class TileRenderer : MonoBehaviour {
     private Tilemap tilemap;
     PlayerTag playerTag;
 
-    // PlayerTilemap playerTilemap;
-    
-    void Awake(){
+    void Awake() {
         tilemap = GameManager.Instance.tilemap;
         playerTag = gameObject.GetComponentInParent<Player>().playerTag;
-        // playerTilemap  = gameObject.GetComponentInParent<Player>().playerTilemap;
-        // Debug.Log("pplayertilemap "+playerTilemap.name+" "+gameObject.name);
         PlayerTilemap.TileConquered += TileConquered;
         PlayerTilemap.TileAdjacent += TileAdjacent;
     }
 
     void Start() {
-        
+
     }
 
     public void TileConquered(Vector3Int cellPosition, PlayerTag playerTag) {
