@@ -9,7 +9,7 @@ public class PlayerTilemap : MonoBehaviour {
     public static event Action<Vector3Int, PlayerTag> TileConquered;
     public static event Action<Vector3Int, PlayerTag> TileAdjacent;
     // HashSet<Vector3Int> conqueredTilesPositions = new HashSet<Vector3Int>();
-    HashSet<Vector3Int> adjacentTilesPositions = new HashSet<Vector3Int>();
+    public List<Vector3Int> adjacentTilesPositions = new List<Vector3Int>();
     // HashSet<Vector3Int> enemyTilesPositions = new HashSet<Vector3Int>();
     public Tilemap tilemap;
     public Dictionary<Vector3Int, ArenaTile> arenaTilesPositions;

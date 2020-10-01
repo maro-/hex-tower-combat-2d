@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 7409561964672947034}
   - component: {fileID: 6000492312506158717}
   - component: {fileID: 6779934926065476483}
+  - component: {fileID: -8220889261674431512}
   - component: {fileID: 8505075921183964919}
   m_Layer: 0
   m_Name: EnemyTower1
@@ -107,7 +108,7 @@ MonoBehaviour:
   - cost: 10
     visualization: {fileID: 6817356268836521255}
     bullet: {fileID: 8435252496686334747, guid: 58f4af6b9f52d0c49ac019c073cb7afe, type: 3}
-    attackSpeed: 1
+    attackSpeed: 2
     attackDamage: 5
     healthPoints: 100
     attackRange: 1
@@ -135,12 +136,12 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.3
+  m_Radius: 2.7
 --- !u!114 &6779934926065476483
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -153,6 +154,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7da334881d4d5e84c9998d837b7fc8fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &-8220889261674431512
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 825494291485020208}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c8b5d27f0a3b8a46bc26b0dcd3519b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  adjacentEnemyPositions: []
+  enemiesInRange: []
 --- !u!50 &8505075921183964919
 Rigidbody2D:
   serializedVersion: 4

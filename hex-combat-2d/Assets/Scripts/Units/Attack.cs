@@ -34,9 +34,7 @@ public class Attack : MonoBehaviour {
         // 1
         if (target == null) {
             foreach (GameObject enemy in enemiesInRange) {
-                if (target == null) {
                     target = enemy;
-                }
             }
         }
         // float minimalEnemyDistance = float.MaxValue;
@@ -71,7 +69,7 @@ public class Attack : MonoBehaviour {
     void OnTriggerEnter2D(Collider2D other) {
         Debug.Log("OnTriggerEnter");
         // 2
-        if (other.gameObject.tag.Equals("Enemy")) {
+        if (!other.gameObject.tag.Equals(gameObject.tag)) {
             Debug.Log("enemy entered");
             enemiesInRange.Add(other.gameObject);
             EnemyDestructionDelegate del = other.gameObject.GetComponent<EnemyDestructionDelegate>();
@@ -81,7 +79,7 @@ public class Attack : MonoBehaviour {
     // 3
     void OnTriggerExit2D(Collider2D other) {
         Debug.Log("OnTriggerExit");
-        if (other.gameObject.tag.Equals("Enemy")) {
+        if (!other.gameObject.tag.Equals(gameObject.tag)) {
             Debug.Log("enemy exited");
             enemiesInRange.Remove(other.gameObject);
             EnemyDestructionDelegate del = other.gameObject.GetComponent<EnemyDestructionDelegate>();

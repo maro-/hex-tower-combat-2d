@@ -274,6 +274,8 @@ GameObject:
   - component: {fileID: -4814266144213804564}
   - component: {fileID: 622131015825327307}
   - component: {fileID: 3419149243591888443}
+  - component: {fileID: -6115838633299272644}
+  - component: {fileID: -5699853377674566371}
   m_Layer: 0
   m_Name: Tower1
   m_TagString: Untagged
@@ -289,7 +291,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5805414268206717574}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -7.1951985}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1188673003131984653}
@@ -400,7 +402,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 3
+  m_Radius: 2.7
 --- !u!114 &3419149243591888443
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -415,6 +417,39 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   adjacentEnemyPositions: []
   enemiesInRange: []
+--- !u!114 &-6115838633299272644
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5805414268206717574}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7da334881d4d5e84c9998d837b7fc8fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!50 &-5699853377674566371
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5805414268206717574}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &8993192493032730474
 GameObject:
   m_ObjectHideFlags: 0
