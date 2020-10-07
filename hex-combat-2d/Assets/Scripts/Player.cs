@@ -22,7 +22,7 @@ public class Player : MonoBehaviour {
     }
 
     public void createTower() {
-        if (incomeManager.GoldAmount >= 15) {
+        if (incomeManager.GoldAmount >= 15 && !playerTilemap.arenaTilesPositions[playerTilemap.SelectedPosition].IsConquered) {
             InstantiateTower(playerTilemap.SelectedPosition);
             incomeManager.GoldAmount -= 15;
         }

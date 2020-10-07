@@ -86,12 +86,14 @@ public class TowerData : MonoBehaviour {
         adjacentCellPositions.Add(cellPosition + new Vector3Int(-1, 0, 0));
         adjacentCellPositions.Add(cellPosition + new Vector3Int(0, 1, 0));
         adjacentCellPositions.Add(cellPosition + new Vector3Int(0, -1, 0));
-        adjacentCellPositions.Add(cellPosition + new Vector3Int(-1, -1, 0));
+        
 
         // Vertical axis has offset, so neighbor coordinates change in dependancy of odd/even row
         if (IsRowEven(cellPosition)) {
+            adjacentCellPositions.Add(cellPosition + new Vector3Int(-1, -1, 0));
             adjacentCellPositions.Add(cellPosition + new Vector3Int(-1, 1, 0));
         } else {
+            adjacentCellPositions.Add(cellPosition + new Vector3Int(1, -1, 0));
             adjacentCellPositions.Add(cellPosition + new Vector3Int(1, 1, 0));
         }
     }
