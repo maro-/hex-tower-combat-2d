@@ -32,7 +32,9 @@ public class TileRenderer : MonoBehaviour {
 
     public void TileAdjacent(Vector3Int cellPosition, PlayerTag playerTag) {
         if (this.playerTag == playerTag) {
-            tilemap.SetTile(cellPosition, activeTile);
+            if (activeTile != null) {
+                tilemap.SetTile(cellPosition, activeTile);
+            }
         }
     }
 
