@@ -19,6 +19,9 @@ public class PlayerController : MonoBehaviour {
         tilemap = GameManager.Instance.tilemap;
         arenaTilesPositions = GameManager.Instance.arenaTilesPositions;
         player = Instantiate(player, new Vector3(20, 0, 0), Quaternion.identity);
+        // PlayerTilemap.TileConquered += TileConquered;
+        PlayerTilemap.TileAdjacent += TileAdjacent;
+        PlayerTilemap.TileUnadjacent += TileFree;
     }
     void Start() {
         TileRenderer.TilePreviouslySelected += UpdatePreviouslySelectedTile;
@@ -54,6 +57,29 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
+    public void TileAdjacent(Vector3Int cellPosition, PlayerTag playerTag) {
+        if (this.player.playerTag == playerTag) {
+            //     if (activeTile != null) {
+            //         tilemap.SetTile(cellPosition, activeTile);
+            //     }
+            this.arenaTilesPositions[cellPosition].ActiveAdjacentsTileCount += 1;
+        }
+
+    }
+
+    public void TileFree(Vector3Int cellPosition, PlayerTag playerTag) {
+        if (this.player.playerTag == playerTag) {
+            //     if (activeTile != null) {
+            //         tilemap.SetTile(cellPosition, activeTile);
+            //     }
+            this.arenaTilesPositions[cellPosition].ActiveAdjacentsTileCount -= 1;
+            if (this.arenaTilesPositions[cellPosition].ActiveAdjacentsTileCount == 0) {
+                this.player.playerTilemap.tileRenderer.TileUnadjacent(cellPosition, playerTag);
+            }
+        }
+
+    }
+
     void UpdatePreviouslySelectedTile(TileBase tileBase, PlayerTag playerTag) {
         if (this.player.playerTag == playerTag) {
             previouslySelectedTile = tileBase;
@@ -62,6 +88,8 @@ public class PlayerController : MonoBehaviour {
 
     void OnDestroy() {
         TileRenderer.TilePreviouslySelected -= UpdatePreviouslySelectedTile;
+        PlayerTilemap.TileAdjacent -= TileAdjacent;
+        PlayerTilemap.TileUnadjacent -= TileFree;
     }
 
 }

@@ -108,8 +108,8 @@ MonoBehaviour:
   - cost: 10
     visualization: {fileID: 6817356268836521255}
     bullet: {fileID: 8435252496686334747, guid: 58f4af6b9f52d0c49ac019c073cb7afe, type: 3}
-    attackSpeed: 2
-    attackDamage: 5
+    attackSpeed: 1
+    attackDamage: 27
     healthPoints: 100
     attackRange: 1
   - cost: 5
@@ -123,7 +123,7 @@ MonoBehaviour:
     visualization: {fileID: 2751313602549521467}
     bullet: {fileID: 8435252496686334747, guid: 58f4af6b9f52d0c49ac019c073cb7afe, type: 3}
     attackSpeed: 1
-    attackDamage: 11
+    attackDamage: 27
     healthPoints: 170
     attackRange: 1
 --- !u!58 &6000492312506158717

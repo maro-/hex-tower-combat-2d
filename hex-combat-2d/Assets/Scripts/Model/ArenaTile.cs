@@ -25,4 +25,6 @@ public class ArenaTile {
     // public HexTile(Vector3Int cellPosition) {
     //     CellPosition = cellPosition;
     // }
+    private int activeAdjacentsTileCount=0;
+    public int ActiveAdjacentsTileCount { get { return activeAdjacentsTileCount; } set { activeAdjacentsTileCount = value; } }
 }

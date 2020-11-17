@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -50,6 +51,9 @@ public class TowerData : MonoBehaviour {
     private List<Vector3Int> adjacentCellPositions = new List<Vector3Int>();
     public List<Vector3Int> AdjacentCellPositions { get; private set; }
 
+    public Action<Vector3Int,PlayerTag> invokeOnDisable;
+    public PlayerTag playerTag;
+
     // Start is called before the first frame update
     void Start() {
 
@@ -62,6 +66,10 @@ public class TowerData : MonoBehaviour {
 
     void OnEnable() {
         CurrentLevel = levels[0];
+    }
+
+    void OnDisable(){
+        invokeOnDisable?.Invoke(cellPosition,playerTag);
     }
 
     public TowerLevel GetNextLevel() {

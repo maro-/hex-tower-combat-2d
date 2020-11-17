@@ -8,7 +8,8 @@ public class PlayerTilemap : MonoBehaviour {
 
     public static event Action<Vector3Int, PlayerTag> TileConquered;
     public static event Action<Vector3Int, PlayerTag> TileAdjacent;
-    // HashSet<Vector3Int> conqueredTilesPositions = new HashSet<Vector3Int>();
+    public static event Action<Vector3Int, PlayerTag> TileUnadjacent;
+    public static event Action<Vector3Int, PlayerTag> TileFree;
     public List<Vector3Int> adjacentTilesPositions = new List<Vector3Int>();
     // HashSet<Vector3Int> enemyTilesPositions = new HashSet<Vector3Int>();
     public Tilemap tilemap;
@@ -16,7 +17,7 @@ public class PlayerTilemap : MonoBehaviour {
     private Vector3Int selectedPosition;
     public Vector3Int SelectedPosition { get; set; }
     private PlayerTag playerTag;
-    private TileRenderer tileRenderer;
+    public TileRenderer tileRenderer;
 
     void Awake() {
         tilemap = GameManager.Instance.tilemap;
@@ -35,6 +36,19 @@ public class PlayerTilemap : MonoBehaviour {
         arenaTilesPositions[cellPosition].ConqueredByPlayerTag = playerTag;
     }
 
+    public void RemoveFromConqueredTiles(Vector3Int cellPosition, PlayerTag playerTagParameter) {
+        // Add the Tile at 'cellPosition' to the conqueredTilesPositions
+        // conqueredTilesPositions.Add(cellPosition);
+        // Change the sprite of the tile
+        if (playerTag == playerTagParameter) {
+            TileFree?.Invoke(cellPosition, playerTag);
+            // Add the adjacent Tiles to adjacentTilesPositions, so they can be clicked now
+            arenaTilesPositions[cellPosition].IsConquered = false;
+            arenaTilesPositions[cellPosition].ConqueredByPlayerTag = PlayerTag.None;
+            RemoveFromAdjacentTiles(cellPosition);}
+        // } else { tileRenderer.TileFree(cellPosition, playerTagParameter); }
+    }
+
     // public void AddToEnemyTiles(Vector3Int cellPosition) {
     //     // Add the Tile at 'cellPosition' to the conqueredTilesPositions
     //     enemyTilesPositions.Add(cellPosition);
@@ -46,30 +60,55 @@ public class PlayerTilemap : MonoBehaviour {
 
     public void AddToAdjacentTiles(Vector3Int cellPosition) {
         // Add the Tile at 'cellPosition' to the adjacentTilesPositions
-        UpdateAdjacentTile(cellPosition);
+        UpdateAdjacentTile(cellPosition, true);
         // Add the adjacent Tiles to adjacentTilesPositions, so they can be clicked now
         Debug.Log("cellPosition: " + cellPosition.ToString());
-        UpdateAdjacentTile(cellPosition + new Vector3Int(1, 0, 0));
-        UpdateAdjacentTile(cellPosition + new Vector3Int(-1, 0, 0));
-        UpdateAdjacentTile(cellPosition + new Vector3Int(0, 1, 0));
-        UpdateAdjacentTile(cellPosition + new Vector3Int(0, -1, 0));
+        UpdateAdjacentTile(cellPosition + new Vector3Int(1, 0, 0), true);
+        UpdateAdjacentTile(cellPosition + new Vector3Int(-1, 0, 0), true);
+        UpdateAdjacentTile(cellPosition + new Vector3Int(0, 1, 0), true);
+        UpdateAdjacentTile(cellPosition + new Vector3Int(0, -1, 0), true);
 
         // Vertical axis has offset, so neighbor coordinates change in dependancy of odd/even row
         if (IsRowEven(cellPosition)) {
-            UpdateAdjacentTile(cellPosition + new Vector3Int(-1, -1, 0));
-            UpdateAdjacentTile(cellPosition + new Vector3Int(-1, 1, 0));
+            UpdateAdjacentTile(cellPosition + new Vector3Int(-1, -1, 0), true);
+            UpdateAdjacentTile(cellPosition + new Vector3Int(-1, 1, 0), true);
         } else {
-            UpdateAdjacentTile(cellPosition + new Vector3Int(1, -1, 0));
-            UpdateAdjacentTile(cellPosition + new Vector3Int(1, 1, 0));
+            UpdateAdjacentTile(cellPosition + new Vector3Int(1, -1, 0), true);
+            UpdateAdjacentTile(cellPosition + new Vector3Int(1, 1, 0), true);
         }
 
     }
 
-    private void UpdateAdjacentTile(Vector3Int cellPosition) {
-        if (tilemap.HasTile(cellPosition) && arenaTilesPositions[cellPosition].IsConquered == false) {
+    public void RemoveFromAdjacentTiles(Vector3Int cellPosition) {
+        // Add the Tile at 'cellPosition' to the adjacentTilesPositions
+        // UpdateAdjacentTile(cellPosition, false);
+        // Add the adjacent Tiles to adjacentTilesPositions, so they can be clicked now
+        Debug.Log("cellPosition: " + cellPosition.ToString());
+        UpdateAdjacentTile(cellPosition + new Vector3Int(1, 0, 0), false);
+        UpdateAdjacentTile(cellPosition + new Vector3Int(-1, 0, 0), false);
+        UpdateAdjacentTile(cellPosition + new Vector3Int(0, 1, 0), false);
+        UpdateAdjacentTile(cellPosition + new Vector3Int(0, -1, 0), false);
+
+        // Vertical axis has offset, so neighbor coordinates change in dependancy of odd/even row
+        if (IsRowEven(cellPosition)) {
+            UpdateAdjacentTile(cellPosition + new Vector3Int(-1, -1, 0), false);
+            UpdateAdjacentTile(cellPosition + new Vector3Int(-1, 1, 0), false);
+        } else {
+            UpdateAdjacentTile(cellPosition + new Vector3Int(1, -1, 0), false);
+            UpdateAdjacentTile(cellPosition + new Vector3Int(1, 1, 0), false);
+        }
+
+    }
+
+    private void UpdateAdjacentTile(Vector3Int cellPosition, bool addActiveAdjacent) {
+        if (tilemap.HasTile(cellPosition) && arenaTilesPositions[cellPosition].IsConquered == false 
+            && addActiveAdjacent == true) {
             adjacentTilesPositions.Add(cellPosition);
             // tilemap.SetTile(cellPosition, activeTile);
             TileAdjacent?.Invoke(cellPosition, playerTag);
+        } else if (tilemap.HasTile(cellPosition) && addActiveAdjacent == false) {
+            adjacentTilesPositions.Remove(cellPosition);
+            TileUnadjacent?.Invoke(cellPosition, playerTag);
         }
     }
 

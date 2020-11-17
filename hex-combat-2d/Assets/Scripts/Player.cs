@@ -32,8 +32,10 @@ public class Player : MonoBehaviour {
         GameObject towerObject = Instantiate(turretTower,
                 playerTilemap.GetTileWorldPosition(cellPosition),
                 Quaternion.identity);
-        towerObject.tag = playerTag.ToString();
+        // towerObject.tag = playerTag.ToString();
+        towerObject.GetComponent<TowerData>().invokeOnDisable = playerTilemap.RemoveFromConqueredTiles;
         towerObject.GetComponent<TowerData>().CellPosition = cellPosition;
+        towerObject.GetComponent<TowerData>().playerTag = playerTag;
         playerTilemap.AddToAdjacentTiles(cellPosition);
         playerTilemap.AddToConqueredTiles(cellPosition);
     }
