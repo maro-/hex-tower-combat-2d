@@ -17,7 +17,7 @@ public class Attack : MonoBehaviour {
         // hexTilemap = PlayerTilemap.Instance;
         lastShotTime = Time.time;
         towerData = gameObject.GetComponentInChildren<TowerData>();
-        adjacentEnemyPositions = towerData.AdjacentCellPositions;
+        // adjacentEnemyPositions = towerData.AdjacentCellPositions;
         enemiesInRange = new List<GameObject>();
 
     }
@@ -67,10 +67,10 @@ public class Attack : MonoBehaviour {
     }
 
     void OnTriggerEnter2D(Collider2D other) {
-        Debug.Log("OnTriggerEnter");
+        // Debug.Log("OnTriggerEnter");
         // 2
         if (!other.gameObject.tag.Equals(gameObject.tag)) {
-            Debug.Log("enemy entered");
+            // Debug.Log("enemy entered");
             enemiesInRange.Add(other.gameObject);
             EnemyDestructionDelegate del = other.gameObject.GetComponent<EnemyDestructionDelegate>();
             del.enemyDelegate += OnEnemyDestroy;
@@ -78,9 +78,9 @@ public class Attack : MonoBehaviour {
     }
     // 3
     void OnTriggerExit2D(Collider2D other) {
-        Debug.Log("OnTriggerExit");
+        // Debug.Log("OnTriggerExit");
         if (!other.gameObject.tag.Equals(gameObject.tag)) {
-            Debug.Log("enemy exited");
+            // Debug.Log("enemy exited");
             enemiesInRange.Remove(other.gameObject);
             EnemyDestructionDelegate del = other.gameObject.GetComponent<EnemyDestructionDelegate>();
             del.enemyDelegate -= OnEnemyDestroy;

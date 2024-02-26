@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-public class GameManager : MonoBehaviour {
+public class GameManager : MonoBehaviour
+{
 
     public static GameManager Instance { get; private set; }
     // public GameObject turretTower;
@@ -14,33 +15,46 @@ public class GameManager : MonoBehaviour {
     // readonly Vector3Int enemyStartPosition = new Vector3Int(0, 2, 0);
     // public List<Player> players = new List<Player>();
     // public Tilemap tilemap;
-    public Tilemap tilemap;
-    public Dictionary<Vector3Int, ArenaTile> arenaTilesPositions;
+    // public Tilemap tilemap;
+    // public Dictionary<Vector3Int, ArenaTile> arenaTiles;
+    // public Arena arena;
 
 
-    void Awake() {
+    void Awake()
+    {
         Debug.Log("Awake GameManager");
-        if (Instance == null) {
+        if (Instance != null && Instance != this)
+        {
+            Debug.Log("Warning: multiple {} in scene! Destroying this gameObejcts and re-setting Instance", this);
+            Destroy(this.gameObject);
+        }
+        else
+        {
             Instance = this;
-        } else {
-            Debug.Log("Warning: multiple {} in scene!", this);
         }
 
-        arenaTilesPositions = new Dictionary<Vector3Int, ArenaTile>();
-        for (int n = tilemap.cellBounds.xMin; n < tilemap.cellBounds.xMax; n++) {
-            for (int p = tilemap.cellBounds.yMin; p < tilemap.cellBounds.yMax; p++) {
-                Vector3Int cellPosition = (new Vector3Int(n, p, (int)tilemap.transform.position.y));
-                if (tilemap.HasTile(cellPosition)) {
-                    // Debug.Log("Active Tile Position: " + cellPosition);
-                    arenaTilesPositions.Add(cellPosition, new ArenaTile());
-                } else {
-                    // Debug.Log("Inactive Tile Position: " + cellPosition);
-                }
-            }
-        }
-        
+        // arenaTiles = new Dictionary<Vector3Int, ArenaTile>();
+        // for (int n = tilemap.cellBounds.xMin; n < tilemap.cellBounds.xMax; n++)
+        // {
+        //     for (int p = tilemap.cellBounds.yMin; p < tilemap.cellBounds.yMax; p++)
+        //     {
+        //         Vector3Int cellPosition = new Vector3Int(n, p, (int)tilemap.transform.position.y);
+        //         if (tilemap.HasTile(cellPosition))
+        //         {
+        //             // Debug.Log("Active Tile Position: " + cellPosition);
+        //             arenaTiles.Add(cellPosition, new ArenaTile());
+        //         }
+        //         else
+        //         {
+        //             // Debug.Log("Inactive Tile Position: " + cellPosition);
+        //         }
+        //     }
+        // }
+
     }
-    void Start() {
+
+    void Start()
+    {
         // hexTilemap = HexTilemap.Instance;
         // incomeManager = IncomeManager.Instance;
         // Player player1 = new Player("player1", new Vector3Int(0, -2, 0), tilemap);
@@ -58,7 +72,11 @@ public class GameManager : MonoBehaviour {
 
     }
 
-    
+    // public Vector3 GetTileWorldPosition(Vector3Int cellPosition)
+    // {
+    //     return tilemap.CellToWorld(cellPosition);
+    // }
 
-    
+
+
 }

@@ -14,7 +14,7 @@ public class IncomeManager : MonoBehaviour {
         get { return goldAmount; }
         set {
             goldAmount = value;
-            Debug.Log("Change gold from "+GetComponentInParent<Player>().playerTag+" amount to: "+value);
+            // Debug.Log("Change gold from "+GetComponentInParent<Player>().playerTag+" amount to: "+value);
             GoldAmountChanged?.Invoke(goldAmount);
         }
     }
