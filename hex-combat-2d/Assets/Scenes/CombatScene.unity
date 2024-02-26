@@ -282,6 +282,7 @@ GameObject:
   - component: {fileID: 281487578}
   - component: {fileID: 281487581}
   - component: {fileID: 281487580}
+  - component: {fileID: 281487582}
   m_Layer: 0
   m_Name: Grid
   m_TagString: Untagged
@@ -337,7 +338,7 @@ MonoBehaviour:
       conqueredTile: {fileID: 11400000, guid: 3128a4dafeab13345b5a45271b94dfe4, type: 2}
   - key: 1
     val:
-      adjacentTile: {fileID: 11400000, guid: bd1cefa5eb9796c4282f0164c29d53b7, type: 2}
+      adjacentTile: {fileID: 0}
       conqueredTile: {fileID: 11400000, guid: d2b736d61cad82d49ba8ea73d568b8c9, type: 2}
   freeTile: {fileID: 11400000, guid: a0d549a910b09f3439030fd22a809edb, type: 2}
   selectedTile: {fileID: 11400000, guid: 03af32fda15602b4fa260a17515b8c02, type: 2}
@@ -351,6 +352,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3a4c845700714f84eb1c39d54029a044, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &281487582
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 281487577}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 546d683cf576c1a44af2584656e9b471, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &519420028
