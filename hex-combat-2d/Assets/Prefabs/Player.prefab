@@ -47,9 +47,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerTag: 0
   startPosition: {x: 0, y: -2, z: 0}
-  turretTower: {fileID: 5805414268206717574, guid: dd1da8aef477b604da84fe69dd49d8ca, type: 3}
+  turretTower: {fileID: 5805414268206717574, guid: 71cd2d6cb4f64134794690ccf5bc3ed0, type: 3}
   incomeManager: {fileID: 6327215694315738570}
-  towerBuilder: {fileID: -6596146586766071705, guid: 050c728a0ae73e245a4a36e3ad729f71, type: 3}
 --- !u!1001 &1168134710887354009
 PrefabInstance:
   m_ObjectHideFlags: 0
